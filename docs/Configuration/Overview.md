@@ -13,6 +13,28 @@ variables][link-env-vars].
 [link-config]: /config
 [link-env-vars]: /reference/environment-variables
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Configuration Precedence
 
 In Cube.js, environment variables take precedence over values specified
