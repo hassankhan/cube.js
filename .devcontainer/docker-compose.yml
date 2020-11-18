@@ -1,0 +1,46 @@
+version: "3"
+
+services:
+  # Example of PostgreSQL configuration, uncomment if you want to use postgres
+  postgres:
+    image: postgres:12.4
+    environment:
+      POSTGRES_USER: 'test'
+      POSTGRES_PASSWORD: 'test'
+      POSTGRES_DB: 'test'
+
+  cube:
+    image: cubejs/cube:latest
+    environment:
+      CUBEJS_DB_HOST: localhost
+      CUBEJS_DB_NAME: test
+      CUBEJS_DB_USER: test
+      CUBEJS_DB_PASS: test
+      CUBEJS_DEV_MODE: "true"
+      CUBEJS_WEB_SOCKETS: "true"
+      CUBEJS_DB_TYPE: postgres
+      CUBEJS_API_SECRET: 57fb35d5cd24449be1015e48c75405f98812234d376fbcc5479d8790c24a50657e91d5b35142d5a2b5ab2cbfcf7139405e2755fbf6b5184c26ca8e4c718b1cea
+    depends_on:
+      - redis
+      - postgres
+    links:
+      - redis
+      - postgres
+    ports:
+      # It's better to use random port binding for 4000/3000 ports
+      # without it you will not able to start multiple projects inside docker
+      # - 4000
+      # - 3000
+      # 4000 is a port for Cube.js API
+      - 4000:4000
+      # 3000 is a port for Playground web-server
+      - 3000:3000
+    volumes:
+      # If you are going to use own dependencies, for example axios/vault or anything else for getting configuration
+      - .:/cube/conf:delegated
+#      - .:/cube/conf
+    entrypoint: cubejs server
+
+  redis:
+    image: redis:6
+    restart: always
