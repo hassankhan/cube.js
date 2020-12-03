@@ -5,11 +5,6 @@ category: Authentication & Authorization
 menuOrder: 1
 ---
 
-Cube.js uses [JSON Web Tokens (JWT)][link-jwt] which should be passed in the
-`Authorization` header to authenticate requests. JWTs can also be used for
-passing additional information about the user, which can be accessed in the
-[USER_CONTEXT][link-user-context] object in the Data Schema.
-
 [link-jwt]: https://jwt.io/
 [link-user-context]: /cube#context-variables-user-context
 
